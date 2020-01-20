@@ -10,8 +10,6 @@ import javax.persistence.criteria.Root;
 import lombok.extern.slf4j.Slf4j;
 import my.painboard.db.model.ReportDay;
 import my.painboard.db.model.ReportDay_;
-import my.painboard.db.model.User;
-import my.painboard.db.model.User_;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
