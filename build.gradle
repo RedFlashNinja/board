@@ -6,6 +6,7 @@ subprojects {
     version '1.0-SNAPSHOT'
 
     apply plugin: 'java'
+    apply plugin: 'project-report'  // create dependency tree - ./gradlew htmlDependencyReport
 
     sourceCompatibility = 1.8
 
