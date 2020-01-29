@@ -1,4 +1,4 @@
-package my.painboard.db.service;
+package my.painboard.db.service.implementation;
 
 import java.util.Date;
 import java.util.List;

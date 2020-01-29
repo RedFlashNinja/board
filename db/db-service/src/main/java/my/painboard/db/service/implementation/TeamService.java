@@ -1,19 +1,19 @@
-package my.painboard.db.service;
+package my.painboard.db.service.implementation;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import lombok.extern.slf4j.Slf4j;
+import my.painboard.db.model.Team;
+import my.painboard.db.model.Team_;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Root;
-import lombok.extern.slf4j.Slf4j;
-import my.painboard.db.model.Team;
-import my.painboard.db.model.Team_;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import java.util.Date;
+import java.util.List;
 
 @Slf4j
 @Repository
@@ -24,7 +24,7 @@ public class TeamService {
 
     public String create(String name) {
         Team team = new Team();
-        team.setName(name);
+        team.setTeamName(name);
         team.setBorn(new Date());
         em.persist(team);
         return team.getUuid();
@@ -35,7 +35,7 @@ public class TeamService {
         CriteriaUpdate<Team> q = cb.createCriteriaUpdate(Team.class);
         Root<Team> c = q.from(Team.class);
         q.set(c.get(Team_.modified), new Date())
-                .set(c.get(Team_.name), name)
+                .set(c.get(Team_.teamName), name)
                 .where(cb.equal(c.get(Team_.uuid), uuid));
         em.createQuery(q).executeUpdate();
     }

@@ -1,6 +1,8 @@
 package my.painboard.db.service;
 
 import java.util.UUID;
+
+import my.painboard.db.service.implementation.ImgService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

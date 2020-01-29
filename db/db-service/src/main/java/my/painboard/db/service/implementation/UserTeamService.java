@@ -1,4 +1,4 @@
-package my.painboard.db.service;
+package my.painboard.db.service.implementation;
 
 import java.util.Date;
 import java.util.List;
@@ -12,9 +12,9 @@ import javax.persistence.criteria.Root;
 import my.painboard.db.model.Team;
 import my.painboard.db.model.Team_;
 import my.painboard.db.model.User;
+import my.painboard.db.model.User_;
 import my.painboard.db.model.UserTeam;
 import my.painboard.db.model.UserTeam_;
-import my.painboard.db.model.User_;
 import org.springframework.stereotype.Repository;
 
 @Repository

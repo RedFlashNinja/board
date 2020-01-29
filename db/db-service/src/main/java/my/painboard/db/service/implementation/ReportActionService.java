@@ -1,10 +1,9 @@
-package my.painboard.db.service;
+package my.painboard.db.service.implementation;
 
 import lombok.extern.slf4j.Slf4j;
 import my.painboard.db.model.ReportDay_;
 import my.painboard.db.model.ReportedAction;
 import my.painboard.db.model.ReportedAction_;
-import my.painboard.db.model.User_;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +26,7 @@ public class ReportActionService {
     @Autowired
     private ReportDayService reportDayService;
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
     @Autowired
     private ImgService imgService;
 
@@ -37,7 +36,7 @@ public class ReportActionService {
             remove(oldAction.getUuid());
         }
         ReportedAction action = new ReportedAction();
-        action.setUser(userService.getByUuid(userid));
+        action.setUser(userServiceImpl.getByUuid(userid));
         action.setImg(imgService.getByUuid(imageId));
         action.setReportDay(reportDayService.getById(dayId));
         action.setBorn(new Date());
@@ -59,7 +58,7 @@ public class ReportActionService {
         Root<ReportedAction> c = q.from(ReportedAction.class);
         q.where(cb.and(
                 cb.equal(c.get(ReportedAction_.reportDay).get(ReportDay_.uuid), dayId),
-                cb.equal(c.get(ReportedAction_.user).get(User_.uuid), userid),
+//                cb.equal(c.get(ReportedAction_.user).get(User_.uuid), userid),
                 cb.isNull(c.get(ReportedAction_.dead))));
         List<ReportedAction> list = em.createQuery(q.select(c)).getResultList();
         return list == null || list.isEmpty() ? null : list.get(0);

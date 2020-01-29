@@ -15,6 +15,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "TEAM")
 public class Team extends PersistentObject{
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "team_name", nullable = false)
+    private String teamName;
 }

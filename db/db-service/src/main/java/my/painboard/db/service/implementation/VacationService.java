@@ -1,4 +1,4 @@
-package my.painboard.db.service;
+package my.painboard.db.service.implementation;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

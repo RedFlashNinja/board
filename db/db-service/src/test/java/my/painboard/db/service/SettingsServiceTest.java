@@ -1,5 +1,6 @@
 package my.painboard.db.service;
 
+import my.painboard.db.service.implementation.SettingsService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
