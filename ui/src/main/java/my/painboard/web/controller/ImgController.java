@@ -1,12 +1,9 @@
-package my.painboard.service.controller;
+package my.painboard.web.controller;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import my.painboard.db.model.Img;
-import my.painboard.db.service.ImgService;
-import my.painboard.service.dto.ActionResult;
-import my.painboard.service.dto.UIImage;
+import my.painboard.db.service.implementation.ImgService;
+import my.painboard.web.dto.ActionResult;
+import my.painboard.web.dto.UIImage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @RestController
 @RequestMapping("/imgs")

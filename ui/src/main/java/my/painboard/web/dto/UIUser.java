@@ -1,4 +1,4 @@
-package my.painboard.service.dto;
+package my.painboard.web.dto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,15 +15,16 @@ public class UIUser {
     private String uuid;
     private String name;
     private String team;
+    private String password;
     private List<String> teamUuids = new ArrayList<>();
 
     public UIUser(User user, List<Team>  teams) {
         this.uuid = user.getUuid();
-        this.name = user.getName();
+        this.name = user.getUserName();
         String ttt = "";
         for(Team t: teams) {
             this.teamUuids.add(t.getUuid());
-            ttt += t.getName() + " ";
+            ttt += t.getTeamName() + " ";
         }
         this.team = ttt;
     }

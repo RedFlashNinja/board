@@ -1,4 +1,4 @@
-package my.painboard.service.dto;
+package my.painboard.web.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

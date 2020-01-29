@@ -1,11 +1,5 @@
-package my.painboard.service.controller;
+package my.painboard.web.controller;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import my.painboard.db.model.Img;
 import my.painboard.db.model.ReportDay;
@@ -13,27 +7,34 @@ import my.painboard.db.model.ReportedAction;
 import my.painboard.db.model.Settings;
 import my.painboard.db.model.Team;
 import my.painboard.db.model.User;
-import my.painboard.db.service.HistoryService;
-import my.painboard.db.service.ImgService;
-import my.painboard.db.service.ReportActionService;
-import my.painboard.db.service.ReportDayService;
-import my.painboard.db.service.SettingsService;
-import my.painboard.db.service.TeamService;
 import my.painboard.db.service.UserService;
-import my.painboard.db.service.UserTeamService;
-import my.painboard.service.dto.UIImage;
-import my.painboard.service.dto.UIReportDay;
-import my.painboard.service.dto.UIStatus;
-import my.painboard.service.dto.UIStatusDay;
-import my.painboard.service.dto.UITable;
-import my.painboard.service.dto.UITeamTable;
-import my.painboard.service.dto.UIUser;
-import my.painboard.service.dto.UIUserState;
+import my.painboard.db.service.implementation.HistoryService;
+import my.painboard.db.service.implementation.ImgService;
+import my.painboard.db.service.implementation.ReportActionService;
+import my.painboard.db.service.implementation.ReportDayService;
+import my.painboard.db.service.implementation.SettingsService;
+import my.painboard.db.service.implementation.TeamService;
+import my.painboard.db.service.implementation.UserTeamService;
+import my.painboard.web.dto.UIImage;
+import my.painboard.web.dto.UIReportDay;
+import my.painboard.web.dto.UIStatus;
+import my.painboard.web.dto.UIStatusDay;
+import my.painboard.web.dto.UITable;
+import my.painboard.web.dto.UITeamTable;
+import my.painboard.web.dto.UIUser;
+import my.painboard.web.dto.UIUserState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -108,7 +109,7 @@ public class CalendarController {
         List<UIImage> imgs = new ArrayList<>();
         List<Img> imgss = imgService.list();
         Collections.sort(imgss, (o1, o2) -> o2.getLevel() - o1.getLevel());
-        for (Img img : imgss){
+        for (Img img : imgss) {
             imgs.add(new UIImage(img));
         }
         table.setImgs(imgs);
@@ -127,14 +128,14 @@ public class CalendarController {
         List<UIImage> imgs = new ArrayList<>();
         List<Img> imgss = imgService.list();
         Collections.sort(imgss, (o1, o2) -> o2.getLevel() - o1.getLevel());
-        for (Img img : imgss){
+        for (Img img : imgss) {
             imgs.add(new UIImage(img));
         }
         table.setImgs(imgs);
 
         for (Team team : teamService.list()) {
             List<User> users = userTeamService.getAllByTeam(team.getUuid());
-            table.getUiUsers().put(team.getName(), getUserTable(users, 12, 2));
+            table.getUiUsers().put(team.getTeamName(), getUserTable(users, 12, 2));
         }
         return table;
     }
@@ -150,14 +151,14 @@ public class CalendarController {
         List<UIImage> imgs = new ArrayList<>();
         List<Img> imgss = imgService.list();
         Collections.sort(imgss, (o1, o2) -> o2.getLevel() - o1.getLevel());
-        for (Img img : imgss){
+        for (Img img : imgss) {
             imgs.add(new UIImage(img));
         }
         table.setImgs(imgs);
 
         Team team = teamService.getByUuid(teamUuuid);
         List<User> users = userTeamService.getAllByTeam(team.getUuid());
-        table.getUiUsers().put(team.getName(), getUserTable(users, 12, 2));
+        table.getUiUsers().put(team.getTeamName(), getUserTable(users, 12, 2));
         return table;
     }
 

@@ -1,9 +1,9 @@
-package my.painboard.service.controller;
+package my.painboard.web.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import my.painboard.db.service.SettingsService;
-import my.painboard.service.dto.ActionResult;
-import my.painboard.service.dto.UISetting;
+import my.painboard.db.service.implementation.SettingsService;
+import my.painboard.web.dto.ActionResult;
+import my.painboard.web.dto.UISetting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;

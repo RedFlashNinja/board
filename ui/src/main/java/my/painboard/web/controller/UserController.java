@@ -1,12 +1,11 @@
-package my.painboard.service.controller;
+package my.painboard.web.controller;
 
-import java.util.Arrays;
 import lombok.extern.slf4j.Slf4j;
 import my.painboard.db.model.User;
-import my.painboard.db.service.UserService;
-import my.painboard.db.service.UserTeamService;
-import my.painboard.service.dto.ActionResult;
-import my.painboard.service.dto.UIUser;
+import my.painboard.db.service.implementation.UserServiceImpl;
+import my.painboard.db.service.implementation.UserTeamService;
+import my.painboard.web.dto.ActionResult;
+import my.painboard.web.dto.UIUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,8 +22,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
     @Autowired
     private UserTeamService userTeamService;
 
@@ -34,45 +34,41 @@ public class UserController {
     }
 
     @RequestMapping("/list")
-    public
     @ResponseBody
-    List<UIUser> list() {
+    public List<UIUser> list() {
         List<UIUser> res = new ArrayList<>();
-        for (User item : userService.list()) {
+        for (User item : userServiceImpl.list()) {
             res.add(new UIUser(item, userTeamService.getAllByUser(item.getUuid())));
         }
         return res;
     }
 
     @RequestMapping("/get/{uuid}")
-    public
     @ResponseBody
-    UIUser get(@PathVariable String uuid) {
-        System.out.println("User requested {}" +  uuid);
-        return new UIUser(userService.getByUuid(uuid), userTeamService.getAllByUser(uuid));
+    public UIUser get(@PathVariable String uuid) {
+        System.out.println("User requested {}" + uuid);
+        return new UIUser(userServiceImpl.getByUuid(uuid), userTeamService.getAllByUser(uuid));
     }
 
     @RequestMapping(value = "/modify", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public
     @ResponseBody
-    ActionResult addUser(@RequestBody UIUser user) {
+    public ActionResult addUser(@RequestBody UIUser user) {
         System.out.println("user = " + user.getName());
         System.out.println("uuid = " + user.getUuid());
         System.out.println("team1 = " + user.getTeam());
         if (user.getUuid() == null) {
-            userService.create(user.getName(), user.getTeamUuids());
+            userServiceImpl.create(user.getName(), user.getTeamUuids());
         } else {
-            userService.update(user.getUuid(), user.getName(), user.getTeamUuids());
+            userServiceImpl.update(user.getUuid(), user.getName(), user.getTeamUuids());
         }
         return new ActionResult(true, "Seems that ok");
     }
 
 
     @RequestMapping("/remove/{uuid}")
-    public
     @ResponseBody
-    ActionResult removeUser(@PathVariable String uuid) {
-        userService.remove(uuid);
+    public ActionResult removeUser(@PathVariable String uuid) {
+        userServiceImpl.remove(uuid);
         return new ActionResult(true, "Seems that ok");
     }
 }

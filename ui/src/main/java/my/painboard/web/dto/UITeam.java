@@ -1,4 +1,4 @@
-package my.painboard.service.dto;
+package my.painboard.web.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,6 +14,6 @@ public class UITeam {
 
     public UITeam(Team team) {
         this.setUuid(team.getUuid());
-        this.setName(team.getName());
+        this.setName(team.getTeamName());
     }
 }

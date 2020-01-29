@@ -1,4 +1,4 @@
-package my.painboard.service.dto;
+package my.painboard.web.dto;
 
 import java.util.ArrayList;
 import java.util.HashMap;
